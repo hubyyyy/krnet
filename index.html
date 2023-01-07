@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        <link rel="canonical" href="https://github.com/VincentStimper/normalizing-flows/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>Normalizing Flows</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+        <link href="assets/_mkdocstrings.css" rel="stylesheet">
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">Normalizing Flows</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem active">
+                                <a href="." class="nav-link">about</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="references/" class="nav-link">API</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="references/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#normalizing-flows" class="nav-link">Normalizing Flows</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#implemented-flows" class="nav-link">Implemented Flows</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#used-by" class="nav-link">Used by</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="normalizing-flows">Normalizing Flows</h1>
+<p><a href="https://github.com/psf/black"><img alt="Code Style: Black" src="https://img.shields.io/badge/Code%20Style-black-black.svg" /></a>
+<a href="https://opensource.org/licenses/MIT"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
+<a href="https://pypi.org/project/normflows/"><img alt="PyPI" src="https://img.shields.io/badge/PyPI-1.4-blue.svg" /></a>
+<a href="https://pepy.tech/project/normflows"><img alt="Downloads" src="https://static.pepy.tech/personalized-badge/normflows?period=total&amp;units=international_system&amp;left_color=grey&amp;right_color=orange&amp;left_text=Downloads" /></a></p>
+<p>This is a PyTorch implementation of normalizing flows. Many popular flow architectures are implemented,
+see the <a href="#implemented-flows">list below</a>. The package can be easily <a href="#installation">installed via pip</a>.
+The basic usage is described <a href="#usage">here</a>. There are several sample use cases implemented in the 
+<a href="https://github.com/VincentStimper/normalizing-flows/tree/master/example"><code>example</code> folder</a>, 
+including <a href="https://github.com/VincentStimper/normalizing-flows/blob/master/example/glow.ipynb">Glow</a>,
+a <a href="https://github.com/VincentStimper/normalizing-flows/blob/master/example/vae.py">VAE</a>, and
+a <a href="https://github.com/VincentStimper/normalizing-flows/blob/master/example/residual.ipynb">Residual Flow</a>.</p>
+<h2 id="implemented-flows">Implemented Flows</h2>
+<ul>
+<li>Planar Flow (<a href="https://arxiv.org/abs/1505.05770">Rezende &amp; Mohamed, 2015</a>)</li>
+<li>Radial Flow (<a href="https://arxiv.org/abs/1505.05770">Rezende &amp; Mohamed, 2015</a>)</li>
+<li>NICE (<a href="https://arxiv.org/abs/1410.8516">Dinh et al., 2014</a>)</li>
+<li>Real NVP (<a href="https://arxiv.org/abs/1605.08803">Dinh et al., 2016</a>)</li>
+<li>Glow (<a href="https://arxiv.org/abs/1807.03039">Kingma &amp; Dhariwal, 2018</a>)</li>
+<li>Masked Autoregressive Flow (<a href="https://proceedings.neurips.cc/paper/2017/hash/6c1da886822c67822bcf3679d04369fa-Abstract.html">Papamakarios et al., 2017</a>)</li>
+<li>Neural Spline Flow (<a href="https://arxiv.org/abs/1906.04032">Durkan et al., 2019</a>)</li>
+<li>Circular Neural Spline Flow (<a href="http://proceedings.mlr.press/v119/rezende20a.html">Rezende et al., 2020</a>)</li>
+<li>Residual Flow (<a href="https://arxiv.org/abs/1906.02735">Chen et al., 2019</a>)</li>
+<li>Stochastic Normalizing Flows (<a href="https://arxiv.org/abs/2002.06707">Wu et al., 2020</a>)</li>
+</ul>
+<p>Note that Neural Spline Flows with circular and non-circular coordinates
+are also supported.</p>
+<h2 id="installation">Installation</h2>
+<p>The latest version of the package can be installed via pip</p>
+<pre><code>pip install normflows
+</code></pre>
+<p>At least Python 3.7 is required. If you want to use a GPU, make sure that
+PyTorch is set up correctly by following the instructions at the
+<a href="https://pytorch.org/get-started/locally/">PyTorch website</a>.</p>
+<p>To run the example notebooks clone the repository first</p>
+<pre><code>git clone https://github.com/VincentStimper/normalizing-flows.git
+</code></pre>
+<p>and then install the dependencies.</p>
+<pre><code>pip install -r requirements_examples.txt
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p><a href="https://colab.research.google.com/github/VincentStimper/normalizing-flows/blob/master/example/real_nvp_colab.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p>A normalizing flow consists of a base distribution, defined in 
+<a href="https://github.com/VincentStimper/normalizing-flows/blob/master/normflows/distributions/base.py"><code>nf.distributions.base</code></a>,
+and a list of flows, given in
+<a href="https://github.com/VincentStimper/normalizing-flows/tree/master/normflows/flows"><code>nf.flows</code></a>.
+Let's assume our target is a 2D distribution. We pick a diagonal Gaussian
+base distribution, which is the most popular choice. Our flow shall be a
+<a href="https://arxiv.org/abs/1605.08803">Real NVP model</a> and, therefore, we need
+to define a neural network for computing the parameters of the affine coupling
+map. One dimension is used to compute the scale and shift parameter for the
+other dimension. After each coupling layer we swap their roles.</p>
+<pre><code class="language-python">import normflows as nf
+
+# Define 2D Gaussian base distribution
+base = nf.distributions.base.DiagGaussian(2)
+
+# Define list of flows
+num_layers = 32
+flows = []
+for i in range(num_layers):
+    # Neural network with two hidden layers having 64 units each
+    # Last layer is initialized by zeros making training more stable
+    param_map = nf.nets.MLP([1, 64, 64, 2], init_zeros=True)
+    # Add flow layer
+    flows.append(nf.flows.AffineCouplingBlock(param_map))
+    # Swap dimensions
+    flows.append(nf.flows.Permute(2, mode='swap'))
+</code></pre>
+<p>Once they are set up, we can define a
+<a href="https://github.com/VincentStimper/normalizing-flows/blob/master/normflows/core.py#L7"><code>nf.NormalizingFlow</code></a>
+model. If the target density is available, it can be added to the model
+to be used during training. Sample target distributions are given in
+<a href="https://github.com/VincentStimper/normalizing-flows/blob/master/normflows/distributions/target.py"><code>nf.distributions.target</code></a>.</p>
+<pre><code class="language-python"># If the target density is not given
+model = nf.NormalizingFlow(base, flows)
+
+# If the target density is given
+target = nf.distributions.target.TwoMoons()
+model = nf.NormalizingFlow(base, flows, target)
+</code></pre>
+<p>The loss can be computed with the methods of the model and minimized.</p>
+<pre><code class="language-python"># When doing maximum likelihood learning, i.e. minimizing the forward KLD
+# with no target distribution given
+loss = model.forward_kld(x)
+
+# When minimizing the reverse KLD based on the given target distribution
+loss = model.reverse_kld(num_samples=512)
+
+# Optimization as usual
+loss.backward()
+optimizer.step()
+</code></pre>
+<p>As more extensive version of this example is given as a 
+<a href="https://github.com/VincentStimper/normalizing-flows/blob/master/example/real_nvp_colab.ipynb">notebook</a>, 
+which can directly be opened in 
+<a href="https://colab.research.google.com/github/VincentStimper/normalizing-flows/blob/master/example/real_nvp_colab.ipynb">Colab</a>.</p>
+<p>For more illustrative examples of how to use the package see the
+<a href="https://github.com/VincentStimper/normalizing-flows/tree/master/example"><code>example</code></a>
+directory. More advanced experiments can be done with the scripts listed in the
+<a href="https://github.com/VincentStimper/resampled-base-flows">repository about resampled base distributions</a>,
+see its <a href="https://github.com/VincentStimper/resampled-base-flows/tree/master/experiments"><code>experiments</code></a>
+folder.</p>
+<h2 id="used-by">Used by</h2>
+<p>The library has been used in several research papers, which are listed below.</p>
+<blockquote>
+<p>Andrew Campbell, Wenlong Chen, Vincent Stimper, José Miguel Hernández-Lobato, and Yichuan Zhang. 
+<a href="https://proceedings.mlr.press/v139/campbell21a.html">A gradient based strategy for Hamiltonian Monte Carlo hyperparameter optimization</a>. 
+In Proceedings of the 38th International Conference on Machine Learning, pp. 1238–1248. PMLR, 2021.</p>
+<p><a href="https://github.com/VincentStimper/hmc-hyperparameter-tuning">Code available on GitHub.</a></p>
+<p>Vincent Stimper, Bernhard Schölkopf, José Miguel Hernández-Lobato. 
+<a href="https://proceedings.mlr.press/v151/stimper22a">Resampling Base Distributions of Normalizing Flows</a>. 
+In Proceedings of The 25th International Conference on Artificial Intelligence and Statistics, volume 151, pp. 4915–4936, 2022.</p>
+<p><a href="https://github.com/VincentStimper/resampled-base-flows">Code available on GitHub.</a></p>
+<p>Laurence I. Midgley, Vincent Stimper, Gregor N. C. Simm, Bernhard Schölkopf, José Miguel Hernández-Lobato. 
+<a href="https://arxiv.org/abs/2208.01893">Flow Annealed Importance Sampling Bootstrap</a>. 
+ArXiv, abs/2208.01893, 2022.</p>
+<p><a href="https://github.com/lollcat/fab-torch">Code available on GitHub.</a></p>
+</blockquote>
+<p>Moreover, the <a href="https://github.com/VincentStimper/boltzmann-generators"><code>boltzgen</code></a> library
+has been build upon this package.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2023-01-07 03:44:53.506094+00:00
+-->
